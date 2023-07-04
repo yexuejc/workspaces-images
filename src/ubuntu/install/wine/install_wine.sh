@@ -1,7 +1,12 @@
 #!/bin/bash
 
 # This script currently supports Ubuntu focal only
-dpkg --add-architecture i386
+arch=$(uname -m)
+
+if [[ $arch != "x86_64" ]]; then
+    dpkg --add-architecture i386
+fi
+
 apt update
 wget -qO- https://dl.winehq.org/wine-builds/winehq.key | apt-key add -
 apt install software-properties-common
