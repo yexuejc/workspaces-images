@@ -6,6 +6,7 @@ USER root
 
 ENV HOME /home/kasm-default-profile
 ENV STARTUPDIR /dockerstartup
+ENV USER_PWD "password"
 WORKDIR $HOME
 
 ### Envrionment config
@@ -26,7 +27,7 @@ RUN bash $INST_SCRIPTS/misc/install_tools.sh && rm -rf $INST_SCRIPTS/misc/
 COPY ./src/ubuntu/install/chrome $INST_SCRIPTS/chrome/
 RUN bash $INST_SCRIPTS/chrome/install_chrome.sh  && rm -rf $INST_SCRIPTS/chrome/
 
-### Install Sublime Text
+## Install Sublime Text
 COPY ./src/ubuntu/install/sublime_text $INST_SCRIPTS/sublime_text/
 RUN bash $INST_SCRIPTS/sublime_text/install_sublime_text.sh  && rm -rf $INST_SCRIPTS/sublime_text/
 
@@ -42,6 +43,9 @@ RUN chown 1000:0 $HOME
 ENV HOME /home/kasm-user
 WORKDIR $HOME
 RUN mkdir -p $HOME && chown -R 1000:0 $HOME
+
+RUN adduser kasm-user sudo
+RUN echo "kasm-user:$USER_PWD" | chpasswd
 
 USER 1000
 
