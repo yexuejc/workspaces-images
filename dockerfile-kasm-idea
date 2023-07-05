@@ -27,6 +27,9 @@ RUN bash $INST_SCRIPTS/misc/install_tools.sh && rm -rf $INST_SCRIPTS/misc/
 COPY ./src/ubuntu/install/chrome $INST_SCRIPTS/chrome/
 RUN bash $INST_SCRIPTS/chrome/install_chrome.sh  && rm -rf $INST_SCRIPTS/chrome/
 
+### Install Java
+COPY ./src/ubuntu/install/java $INST_SCRIPTS/java/
+RUN bash $INST_SCRIPTS/java/install_jdk17.sh  && rm -rf $INST_SCRIPTS/java/
 
 ## Install IntelliJ IDEA
 COPY ./src/ubuntu/install/idea $INST_SCRIPTS/idea/

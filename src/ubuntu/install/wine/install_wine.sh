@@ -1,4 +1,5 @@
 #!/bin/bash
+set -ex
 
 # This script currently supports Ubuntu focal only
 arch=$(uname -m)
