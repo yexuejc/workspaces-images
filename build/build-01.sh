@@ -31,7 +31,7 @@ USER_PWD=passwd
 
 #### 使用
 ```
-docker run --rm  -it --shm-size=512m -p 6901:6901 -e VNC_PW=password -e USER_PWD=passwd registry.cn-hangzhou.aliyuncs.com/yexuejc/kasm-ubuntu-idea:dev.01
+docker run -itd --shm-size=512m -p 6901:6901 -e VNC_PW=password -e USER_PWD=admin registry.cn-hangzhou.aliyuncs.com/yexuejc/kasm-ubuntu-idea:dev.01
 ```
 
 #### 账号密码

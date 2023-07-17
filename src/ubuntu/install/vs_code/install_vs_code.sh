@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 set -ex
+cd /opt
 ARCH=$(arch | sed 's/aarch64/arm64/g' | sed 's/x86_64/x64/g')
-wget -q https://update.code.visualstudio.com/latest/linux-deb-${ARCH}/stable -O vs_code.deb
+if [ ! -f "vs_code_${ARCH}.deb" ]; then
+  wget -q https://update.code.visualstudio.com/latest/linux-deb-${ARCH}/stable -O vs_code.deb
+fi
 apt-get update
 apt-get install -y ./vs_code.deb
 mkdir -p /usr/share/icons/hicolor/apps
