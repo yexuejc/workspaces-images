@@ -17,29 +17,8 @@ if [ ! -f "idea-${ARCH}.tar.gz" ]; then
 fi
 
 tar -xzf idea-${ARCH}.tar.gz
-mv idea-* idea
 rm -f idea-${ARCH}.tar.gz
-
-# 桌面快捷方式
-if [ -d "~/Desktop" ]; then
-
-cd ~/Desktop
-
-cat > idea.desktop << EOF
-[Desktop Entry]
-Encoding=UTF-8
-Name=IntelliJ IDEA
-Comment=IntelliJ IDEA
-Exec=/opt/idea/bin/idea.sh
-Icon=/opt/idea/bin/idea.svg
-Terminal=false
-Type=Application
-Categories=Application;Development;
-EOF
-
-chmod +x idea.desktop
-
-fi
+mv idea-* idea
 
 # 破解
 cd /opt
@@ -50,7 +29,3 @@ sh ja-netfilter-all/scripts/install.sh
 
 mv /opt/idea/bin/idea64.vmoptions /opt/idea/bin/idea64.vmoptions_bk
 cp /opt/ja-netfilter-all/vmoptions/idea.vmoptions /opt/idea/bin/idea64.vmoptions
-
-if [ -d "~/Desktop" ]; then
-    cp /opt/ja-netfilter-all/readme.md ~/Desktop/idea_regiest_code.txt
-fi

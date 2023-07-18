@@ -30,7 +30,7 @@ RUN bash $INST_SCRIPTS/chrome/install_chrome.sh  && rm -rf $INST_SCRIPTS/chrome/
 #================================================================================================================
 # 本地已下载（可选）
 #================================================================================================================
-# COPY ./build/ /opt/
+COPY ./build/ /opt/
 #================================================================================================================
 
 ### Install GraalVM Java
@@ -60,6 +60,10 @@ WORKDIR $HOME
 RUN mkdir -p $HOME && mkdir -p $HOME/Desktop/ && chown -R 1000:0 $HOME
 
 RUN adduser kasm-user sudo && echo "kasm-user:$USER_PWD" | chpasswd
+
+## 创建桌面快捷方式
+COPY ./src/ubuntu/install/idea $INST_SCRIPTS/idea/
+RUN bash $INST_SCRIPTS/idea/pycharm_startup.sh && rm -rf $INST_SCRIPTS/idea/
 
 USER 1000
 
