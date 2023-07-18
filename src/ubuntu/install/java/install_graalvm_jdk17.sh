@@ -4,7 +4,7 @@ set -ex
 cd /opt
 
 if [ ! -f "graalvm-java17.tar.gz" ]; then
-    wget -q https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java17-linux-amd64-22.3.0.tar.gz -O graalvm-java17.tar.gz
+    wget -q https://download.oracle.com/graalvm/17/latest/graalvm-jdk-17_linux-x64_bin.tar.gz -O graalvm-java17.tar.gz
 fi
 tar -xzf graalvm-java17.tar.gz
 rm -rf graalvm-java17.tar.gz

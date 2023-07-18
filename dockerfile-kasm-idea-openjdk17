@@ -56,9 +56,9 @@ RUN chown 1000:0 $HOME
 
 ENV HOME /home/kasm-user
 WORKDIR $HOME
-RUN mkdir -p $HOME && mkdir $HOME/Desktop/ && chown -R 1000:0 $HOME
+RUN mkdir -p $HOME && mkdir -p $HOME/Desktop/ && chown -R 1000:0 $HOME
 
-RUN adduser kasm-user sudo && echo "kasm-user:$USER_PWD" | chpasswd && cp /opt/ja-netfilter-all/readme.md $HOME/Desktop/idea_regiest_code.txt
+RUN adduser kasm-user sudo && echo "kasm-user:$USER_PWD" | chpasswd
 
 USER 1000
 
