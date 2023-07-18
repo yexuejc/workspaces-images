@@ -62,7 +62,7 @@ RUN adduser kasm-user sudo && echo "kasm-user:$USER_PWD" | chpasswd
 
 ## 创建桌面快捷方式
 COPY ./src/ubuntu/install/idea $INST_SCRIPTS/idea/
-RUN bash $INST_SCRIPTS/idea/pycharm_startup.sh && rm -rf $INST_SCRIPTS/idea/
+RUN bash $INST_SCRIPTS/idea/idea_startup.sh && rm -rf $INST_SCRIPTS/idea/
 
 USER 1000
 
