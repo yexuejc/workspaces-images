@@ -8,6 +8,7 @@ else
 fi
 # 安装最新的idea
 cd /opt
+apt-get update
 
 if [ ! -f "idea.tar.gz" ]; then
     curl --location --request GET 'https://data.services.jetbrains.com/products/releases?code=IIU&latest=true&type=release' -o idea-version.json

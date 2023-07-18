@@ -1,0 +1,65 @@
+ARG BASE_TAG="develop"
+ARG BASE_IMAGE="core-ubuntu-focal"
+FROM kasmweb/$BASE_IMAGE:$BASE_TAG
+
+USER root
+
+ENV HOME /home/kasm-default-profile
+ENV STARTUPDIR /dockerstartup
+ENV USER_PWD "password"
+WORKDIR $HOME
+
+### Envrionment config
+ENV DEBIAN_FRONTEND noninteractive
+ENV KASM_RX_HOME $STARTUPDIR/kasmrx
+ENV INST_SCRIPTS $STARTUPDIR/install
+
+
+### Install Tools
+COPY ./src/ubuntu/install/tools $INST_SCRIPTS/tools/
+RUN bash $INST_SCRIPTS/tools/install_tools_deluxe.sh  && rm -rf $INST_SCRIPTS/tools/
+
+# Install Utilities
+COPY ./src/ubuntu/install/misc $INST_SCRIPTS/misc/
+RUN bash $INST_SCRIPTS/misc/install_tools.sh && rm -rf $INST_SCRIPTS/misc/
+
+# Install Google Chrome
+COPY ./src/ubuntu/install/chrome $INST_SCRIPTS/chrome/
+RUN bash $INST_SCRIPTS/chrome/install_chrome.sh  && rm -rf $INST_SCRIPTS/chrome/
+
+#================================================================================================================
+# 本地已下载（可选）
+#================================================================================================================
+# COPY ./build/ /opt/
+#================================================================================================================
+
+## Install Java 
+COPY ./src/ubuntu/install/java $INST_SCRIPTS/java/
+RUN bash $INST_SCRIPTS/java/install_jdk17.sh  && rm -rf $INST_SCRIPTS/java/
+
+## Install IntelliJ IDEA
+COPY ./src/ubuntu/install/idea $INST_SCRIPTS/idea/
+RUN bash $INST_SCRIPTS/idea/install_idea.sh  && rm -rf $INST_SCRIPTS/idea/
+
+#================================================================================================================
+# 系统不自带文本编辑器（可选）
+#================================================================================================================
+## Install Visual Studio Code
+COPY ./src/ubuntu/install/vs_code $INST_SCRIPTS/vs_code/
+RUN bash $INST_SCRIPTS/vs_code/install_vs_code.sh  && rm -rf $INST_SCRIPTS/vs_code/
+#================================================================================================================
+
+#ADD ./src/common/scripts $STARTUPDIR
+RUN $STARTUPDIR/set_user_permission.sh $HOME
+
+RUN chown 1000:0 $HOME
+
+ENV HOME /home/kasm-user
+WORKDIR $HOME
+RUN mkdir -p $HOME && mkdir $HOME/Desktop/ && chown -R 1000:0 $HOME
+
+RUN adduser kasm-user sudo && echo "kasm-user:$USER_PWD" | chpasswd && cp /opt/ja-netfilter-all/readme.md $HOME/Desktop/idea_regiest_code.txt
+
+USER 1000
+
+CMD ["--tail-log"]
