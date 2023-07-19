@@ -23,13 +23,30 @@ RUN bash $INST_SCRIPTS/tools/install_tools_deluxe.sh  && rm -rf $INST_SCRIPTS/to
 COPY ./src/ubuntu/install/misc $INST_SCRIPTS/misc/
 RUN bash $INST_SCRIPTS/misc/install_tools.sh && rm -rf $INST_SCRIPTS/misc/
 
+#================================================================================================================
+# 本地已下载（可选）
+#================================================================================================================
+COPY ./build/vs_code* /opt/
+COPY ./build/chrome* /opt/
+COPY ./build/wine/* /opt/wine-pkgs/
+#================================================================================================================
+
+
 # Install Google Chrome
 COPY ./src/ubuntu/install/chrome $INST_SCRIPTS/chrome/
 RUN bash $INST_SCRIPTS/chrome/install_chrome.sh  && rm -rf $INST_SCRIPTS/chrome/
 
-## Install Sublime Text
-COPY ./src/ubuntu/install/sublime_text $INST_SCRIPTS/sublime_text/
-RUN bash $INST_SCRIPTS/sublime_text/install_sublime_text.sh  && rm -rf $INST_SCRIPTS/sublime_text/
+#================================================================================================================
+# 系统不自带文本编辑器（可选）
+#================================================================================================================
+## Install Visual Studio Code
+COPY ./src/ubuntu/install/vs_code $INST_SCRIPTS/vs_code/
+RUN bash $INST_SCRIPTS/vs_code/install_vs_code.sh  && rm -rf $INST_SCRIPTS/vs_code/
+
+# ## Install Sublime Text
+# COPY ./src/ubuntu/install/sublime_text $INST_SCRIPTS/sublime_text/
+# RUN bash $INST_SCRIPTS/sublime_text/install_sublime_text.sh  && rm -rf $INST_SCRIPTS/sublime_text/
+#================================================================================================================
 
 ### Install WINE
 COPY ./src/ubuntu/install/wine $INST_SCRIPTS/wine/
