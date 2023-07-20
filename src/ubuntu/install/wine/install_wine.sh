@@ -9,14 +9,9 @@ if [[ $arch == "x86_64" ]]; then
 fi
 
 apt update
+folder_path=/opt/wine-pkgs
 
-if [ ! -d "/opt/wine-pkgs" ]; then
-    # 在线安装
-    wget -qO- https://dl.winehq.org/wine-builds/winehq.key | apt-key add -
-    apt install software-properties-common
-    apt-add-repository "deb http://dl.winehq.org/wine-builds/ubuntu/ $(lsb_release -cs) main"
-    apt install -y --install-recommends winehq-stable winetricks
-else
+if [ -d "$folder_path" ] && find "$folder_path" -name "*.deb" -print -quit | grep -q .; then
     # 离线安装
     # 离线安装包的来源：在已安装好的PC上执行如下命令进行包的复制
     ### apt update
@@ -24,7 +19,15 @@ else
     ### apt-get --download-only install winehq-devel
     ### apt-get --download-only dist-upgrade
     ### cp -R /var/cache/apt/archives/ /xxx/wine-pkgs/
-    cd /opt/wine-pkgs
+    cd $folder_path
     dpkg -i *.deb
-    rm -rf /opt/wine-pkgs
+    rm -rf $folder_path
+    
+else
+    # 在线安装
+    wget -qO- https://dl.winehq.org/wine-builds/winehq.key | apt-key add -
+    apt install software-properties-common
+    apt-add-repository "deb http://dl.winehq.org/wine-builds/ubuntu/ $(lsb_release -cs) main"
+    apt install -y --install-recommends winehq-stable winetricks
+
 fi

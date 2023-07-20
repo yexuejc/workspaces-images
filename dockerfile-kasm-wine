@@ -3,6 +3,10 @@ ARG BASE_IMAGE="core-ubuntu-focal"
 FROM kasmweb/$BASE_IMAGE:$BASE_TAG
 
 USER root
+#中文
+ENV LANG C.UTF-8
+ENV LANGUAGE C.UTF-8
+ENV LC_ALL C.UTF-8
 
 ENV HOME /home/kasm-default-profile
 ENV STARTUPDIR /dockerstartup
@@ -28,7 +32,7 @@ RUN bash $INST_SCRIPTS/misc/install_tools.sh && rm -rf $INST_SCRIPTS/misc/
 #================================================================================================================
 COPY ./build/vs_code* /opt/
 COPY ./build/chrome* /opt/
-COPY ./build/wine/* /opt/wine-pkgs/
+COPY ./build/wine/ /opt/wine-pkgs/
 #================================================================================================================
 
 
