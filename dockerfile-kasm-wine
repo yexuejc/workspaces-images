@@ -2,9 +2,6 @@ ARG BASE_TAG="develop"
 ARG BASE_IMAGE="core-ubuntu-focal"
 FROM kasmweb/$BASE_IMAGE:$BASE_TAG
 
-#debug
-RUN sleep 600
-
 USER root
 #中文
 ENV LANG C.UTF-8
