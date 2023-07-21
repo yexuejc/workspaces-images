@@ -1,9 +1,14 @@
 #!/bin/bash
 set -ex
 
-#自动选择源
-cp $INST_SCRIPTS/source/source.list* /etc/apt/
-cp -f /etc/apt/sources.list /etc/apt/sources.list.default
+# 自动选择源
+# ===========================================================
+
+if [ -d $$INST_SCRIPTS/source/ ]; then
+    cp $INST_SCRIPTS/source/source.list* /etc/apt/
+    cp -f /etc/apt/sources.list /etc/apt/sources.list.default
+fi
+
 folder_path=/etc/apt/
 
 # 获取以source.list开头的文件列表
@@ -29,15 +34,24 @@ for file_path in $file_list; do
     delay=$(curl -o /dev/null -s -w "%{time_total}\n" "http://$domain" 2>/dev/null)
   
     # 判断延迟是否为最小值或未初始化
-    if [ "$delay" != "" ] && (($(bc <<< "$delay < $min_delay") || [ "$min_delay" == -1 ])); then
+    if [ "$delay" != "" ] && ([[ $(bc <<< "$delay < $min_delay") -eq 1 ]] || [ "$min_delay" == -1 ]); then
         min_delay="$delay"
         min_domain="$domain"
         min_file="$file_path"
-        echo "延迟最小的源为: $min_domain, 延迟时间: $min_delay ms"
     fi
 done
 
 # 输出延迟最小的域名对应的文件
-echo "延迟最小的源为: $min_domain, 延迟时间: $min_delay ms"
-echo "替换源为: $min_file"
 cp -f $min_file /etc/apt/sources.list
+
+# 说明文件
+READ_ME=$HOME/source/update_source.txt
+if [ ! -f $READ_ME ]; then
+    echo "替换数据源请执行: update_source.sh" >> $READ_ME
+    cp $INST_SCRIPTS/source/update_source.sh $HOME/source/
+fi
+echo "$(date "+%Y-%m-%d %H:%M:%S")" >> $READ_ME
+echo "延迟最小的源为: $min_domain, 延迟时间: $min_delay ms" >> $READ_ME
+echo "替换源为: $min_file" >> $READ_ME
+echo "" >> $READ_ME
+
