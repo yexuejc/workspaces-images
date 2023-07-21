@@ -4,9 +4,7 @@ set -ex
 # This script currently supports Ubuntu focal only
 arch=$(uname -m)
 
-if [[ $arch == "x86_64" ]]; then
-    dpkg --add-architecture i386
-fi
+dpkg --add-architecture i386
 
 apt update
 folder_path=/opt/wine-pkgs
@@ -21,6 +19,7 @@ if [ -d "$folder_path" ] && find "$folder_path" -name "*.deb" -print -quit | gre
     ### cp -R /var/cache/apt/archives/ /xxx/wine-pkgs/
     cd $folder_path
     dpkg -i *.deb
+    apt install -fy
     rm -rf $folder_path
     
 else
