@@ -4,13 +4,12 @@ set -ex
 # 自动选择源
 # ===========================================================
 
-if [ -d $$INST_SCRIPTS/source/ ]; then
+if [ -d $INST_SCRIPTS/source/ ]; then
     cp $INST_SCRIPTS/source/source.list* /etc/apt/
     cp -f /etc/apt/sources.list /etc/apt/sources.list.default
 fi
 
 folder_path=/etc/apt/
-
 # 获取以source.list开头的文件列表
 file_list=$(find "$folder_path" -name "source.list*")
 
@@ -18,9 +17,6 @@ file_list=$(find "$folder_path" -name "source.list*")
 min_delay=-1
 min_domain=""
 min_file=""
-
-# 获取以source.list开头的文件列表
-file_list=$(find "$folder_path" -name "source.list*")
 
 # 遍历文件列表
 for file_path in $file_list; do
@@ -46,12 +42,13 @@ cp -f $min_file /etc/apt/sources.list
 
 # 说明文件
 READ_ME=$HOME/source/update_source.txt
+mkdir -p $HOME/source
+
 if [ ! -f $READ_ME ]; then
     echo "替换数据源请执行: update_source.sh" >> $READ_ME
     cp $INST_SCRIPTS/source/update_source.sh $HOME/source/
 fi
 echo "$(date "+%Y-%m-%d %H:%M:%S")" >> $READ_ME
-echo "延迟最小的源为: $min_domain, 延迟时间: $min_delay ms" >> $READ_ME
 echo "替换源为: $min_file" >> $READ_ME
+echo "延迟时间: $min_delay ms" >> $READ_ME
 echo "" >> $READ_ME
-
