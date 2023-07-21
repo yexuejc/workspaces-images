@@ -9,27 +9,24 @@
 
 MD5 值
 
-8569e9f54a42288ec30f36cfca7210e7 *build-02.md
 d39accb5df69c6218fff42f32174e5fc *chrome.deb
 aca05d09e3577e96272fcde9b9160740 *chrome.rpm
 286f0e60f63400fbc375341b3dfbe562 *graalvm-java17.tar.gz
 9fd666622942de3955c646359bd158d2 *idea-x64.tar.gz
-877e7dfba50d3de511a6ab1b97cd6f29 *kasm_workspaces_registry.code-workspace
+
 bfb0c5653a3171a7e9430f81f70b3ec1 *openjdk17.tar.gz
-6ee49ab0031e30b2c7de3f0016d1dfcc *package.txt
+
 539fb2a1d6d775ac70e9f6648eafb93d *pycharm-x64.tar.gz
 c5c23b0da144960c1272a871dfb2af1c *vs_code_x64.deb
-wine >
-21e1fff2597517885616ac3fdeef0747 *WineGUI-v2.1.0.deb
-231cae3bdfd5375d590e166275f10e7d *code_1.80.1-1689183569_amd64.deb
-b69aebd1076092eb6f9f3130bf685821 *curl_7.68.0-1ubuntu2.19_amd64.deb
-45c097a050930ce06ba286e3fbf31106 *libcurl4_7.68.0-1ubuntu2.19_amd64.deb
-691fcffefbb2d26170eca9aa11d1944c *libpcsclite1_1.8.26-3_i386.deb
-07be73568f0f5f64cf62b2bc80f7f5e8 *libsmbclient_2%3a4.15.13+dfsg-0ubuntu0.20.04.3_amd64.deb
-f79d14a8dda7d8394de6a0cc7b8b7bdc *libwbclient0_2%3a4.15.13+dfsg-0ubuntu0.20.04.3_amd64.deb
-6ca92427e17229c806f46f2d0e324b74 *samba-libs_2%3a4.15.13+dfsg-0ubuntu0.20.04.3_amd64.deb
-8a30d805fe0eda8c67b8a4375740d2b4 *wine-devel-amd64_8.12~focal-1_amd64.deb
-1d1efe4029316a80b4b3c556f17c0c59 *wine-devel-i386_8.12~focal-1_i386.deb
-a9ca7d280008dc2ec3253e0af38a22bd *wine-devel_8.12~focal-1_amd64.deb
-58c4921698f97a17cabd3ddce9259ea7 *winehq-devel_8.12~focal-1_amd64.deb
-
+21e1fff2597517885616ac3fdeef0747 *wine/WineGUI-v2.1.0.deb
+231cae3bdfd5375d590e166275f10e7d *wine/code_1.80.1-1689183569_amd64.deb
+b69aebd1076092eb6f9f3130bf685821 *wine/curl_7.68.0-1ubuntu2.19_amd64.deb
+45c097a050930ce06ba286e3fbf31106 *wine/libcurl4_7.68.0-1ubuntu2.19_amd64.deb
+691fcffefbb2d26170eca9aa11d1944c *wine/libpcsclite1_1.8.26-3_i386.deb
+07be73568f0f5f64cf62b2bc80f7f5e8 *wine/libsmbclient_2%3a4.15.13+dfsg-0ubuntu0.20.04.3_amd64.deb
+f79d14a8dda7d8394de6a0cc7b8b7bdc *wine/libwbclient0_2%3a4.15.13+dfsg-0ubuntu0.20.04.3_amd64.deb
+6ca92427e17229c806f46f2d0e324b74 *wine/samba-libs_2%3a4.15.13+dfsg-0ubuntu0.20.04.3_amd64.deb
+8a30d805fe0eda8c67b8a4375740d2b4 *wine/wine-devel-amd64_8.12~focal-1_amd64.deb
+1d1efe4029316a80b4b3c556f17c0c59 *wine/wine-devel-i386_8.12~focal-1_i386.deb
+a9ca7d280008dc2ec3253e0af38a22bd *wine/wine-devel_8.12~focal-1_amd64.deb
+58c4921698f97a17cabd3ddce9259ea7 *wine/winehq-devel_8.12~focal-1_amd64.deb
