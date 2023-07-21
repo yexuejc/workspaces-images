@@ -35,6 +35,9 @@ RUN bash $INST_SCRIPTS/misc/install_tools.sh && rm -rf $INST_SCRIPTS/misc/
 # COPY ./build/wine/ /opt/wine-pkgs/
 #================================================================================================================
 
+# 切换国内源
+COPY ./src/ubuntu/source/ $INST_SCRIPTS/source/
+RUN bash $INST_SCRIPTS/source/update_source.sh && rm -rf $INST_SCRIPTS/source/
 
 # Install Google Chrome
 COPY ./src/ubuntu/install/chrome $INST_SCRIPTS/chrome/
