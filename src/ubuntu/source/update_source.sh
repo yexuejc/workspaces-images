@@ -11,7 +11,7 @@ fi
 
 folder_path=/etc/apt/
 # 获取以source.list开头的文件列表
-file_list=$(find "$folder_path" -name "source.list*")
+file_list=$(find "$folder_path" -maxdepth 1 -name "source.list*")
 
 # 初始化延迟最小值和对应的域名和文件名
 min_delay=-1
