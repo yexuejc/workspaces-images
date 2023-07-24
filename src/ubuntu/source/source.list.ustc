@@ -1,4 +1,5 @@
 # mirrors.ustc.edu.cn
+# focal
 ## 中科大镜像源
 deb https://mirrors.ustc.edu.cn/ubuntu/ focal main restricted universe multiverse
 deb https://mirrors.ustc.edu.cn/ubuntu/ focal-updates main restricted universe multiverse

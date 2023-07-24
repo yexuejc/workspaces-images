@@ -1,4 +1,5 @@
 # mirrors.aliyun.com
+# focal
 ## 阿里镜像源
 deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
 deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse

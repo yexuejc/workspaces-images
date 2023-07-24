@@ -1,4 +1,5 @@
 # mirrors.163.com
+# focal
 ## 网易镜像源
 deb http://mirrors.163.com/ubuntu/ focal main restricted universe multiverse
 deb http://mirrors.163.com/ubuntu/ focal-security main restricted universe multiverse
