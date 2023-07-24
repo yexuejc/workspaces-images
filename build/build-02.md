@@ -50,7 +50,7 @@ docker run --rm  -it --shm-size=512m -p 6902:6901 -e VNC_PW=password -e USER_PWD
 ##### 支持离线安装,install_sublime_text替换成vs code
 docker build -t yexuejc/kasm-ubuntu-wine:dev.02 -f dockerfile-kasm-wine .
 
-docker run --rm  -it --shm-size=512m -p 6902:6901 -e VNC_PW=password -e USER_PWD=passwd yexuejc/kasm-ubuntu-wine:dev.02
+docker run --rm  -it --shm-size=1024m -p 6902:6901 -e VNC_PW=password -e USER_PWD=passwd yexuejc/kasm-ubuntu-wine:dev.02
 
 ---
 

@@ -27,7 +27,7 @@ for file_path in $file_list; do
     domain=$(echo "$first_line" | cut -d' ' -f2)
   
     # 进行ping操作并获取延迟
-    delay=$(curl -o /dev/null -s -w "%{time_total}\n" "http://$domain" 2>/dev/null)
+    delay=$(curl -o /dev/null -s -w "%{time_total}\n" "https://$domain" 2>/dev/null)
   
     # 判断延迟是否为最小值或未初始化
     if [ "$delay" != "" ] && ([[ $(bc <<< "$delay < $min_delay") -eq 1 ]] || [ "$min_delay" == -1 ]); then
