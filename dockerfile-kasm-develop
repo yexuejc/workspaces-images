@@ -38,15 +38,26 @@ COPY ./build/chrome* /opt/
 ## 不太好用
 # COPY ./build/wine/ /opt/wine-pkgs/
 COPY ./build/wine/after/ /opt/wine-pkgs/after/
+COPY ./build/*jdk* /opt/
+COPY ./build/vs_code* /opt/
+COPY ./build/idea* /opt/
 #================================================================================================================
 
-# 切换国内源
+# # 切换国内源
 COPY ./src/ubuntu/source/ $INST_SCRIPTS/source/
 RUN bash $INST_SCRIPTS/source/update_source.sh && rm -rf $INST_SCRIPTS/source/
 
 # Install Google Chrome
 COPY ./src/ubuntu/install/chrome $INST_SCRIPTS/chrome/
 RUN bash $INST_SCRIPTS/chrome/install_chrome.sh  && rm -rf $INST_SCRIPTS/chrome/
+
+## Install Java 
+COPY ./src/ubuntu/install/java $INST_SCRIPTS/java/
+RUN bash $INST_SCRIPTS/java/install_jdk17.sh  && rm -rf $INST_SCRIPTS/java/
+
+## Install IntelliJ IDEA
+COPY ./src/ubuntu/install/idea $INST_SCRIPTS/idea/
+RUN bash $INST_SCRIPTS/idea/install_idea.sh  && rm -rf $INST_SCRIPTS/idea/
 
 #================================================================================================================
 # 系统不自带文本编辑器（可选）
@@ -76,10 +87,10 @@ RUN mkdir -p $HOME && chown -R 1000:0 $HOME
 RUN adduser kasm-user sudo
 RUN echo "kasm-user:$USER_PWD" | chpasswd
 
-# Install WineUI
-## 本地安装包路径 /opt/wine-pkgs/after
-COPY ./src/ubuntu/install/wine $INST_SCRIPTS/wine/
-RUN bash $INST_SCRIPTS/wine/custom_startup.sh  && rm -rf $INST_SCRIPTS/wine/
+# # Install WineUI
+# ## 本地安装包路径 /opt/wine-pkgs/after
+# COPY ./src/ubuntu/install/wine $INST_SCRIPTS/wine/
+# RUN bash $INST_SCRIPTS/wine/custom_startup.sh  && rm -rf $INST_SCRIPTS/wine/
 
 USER 1000
 

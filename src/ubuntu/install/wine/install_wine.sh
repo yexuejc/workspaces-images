@@ -18,7 +18,7 @@ if [ -d "$folder_path" ] && find "$folder_path"  -maxdepth 1 -name "*.deb" -prin
     ### apt-get --download-only dist-upgrade
     ### cp -R /var/cache/apt/archives/ /xxx/wine-pkgs/
     cd $folder_path
-    dpkg -ify *.deb
+    dpkg -i *.deb && apt-get -f install
     rm -rf $folder_path
     
 else

@@ -6,8 +6,7 @@ cd $folder_path
 
 if [ -d "$folder_path" ] && find "$folder_path" -maxdepth 1 -name "*.deb" -print -quit | grep -q .; then
     # 本地安装wineUI
-    dpkg -i WineGUI-*.deb
-    apt install -fy
+    dpkg -i WineGUI-*.deb && apt-get -f install
     rm -rf WineGUI-*.deb
 else
     # 在线安装wineUI

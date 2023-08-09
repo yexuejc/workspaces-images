@@ -30,5 +30,5 @@ cp /usr/share/applications/fcitx.desktop /etc/xdg/autostart/
 
 apt purge ibus
 
-dpkg -i /opt/wine-pkgs/after/sogoupinyin_*.deb
-apt install -fy
+dpkg -i /opt/wine-pkgs/after/sogoupinyin_*.deb && apt-get install -fy
+
