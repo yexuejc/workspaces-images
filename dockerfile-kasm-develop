@@ -33,14 +33,14 @@ RUN bash $INST_SCRIPTS/misc/install_tools.sh && rm -rf $INST_SCRIPTS/misc/
 #================================================================================================================
 # 本地已下载（可选）
 #================================================================================================================
-COPY ./build/vs_code* /opt/
-COPY ./build/chrome* /opt/
-## 不太好用
-# COPY ./build/wine/ /opt/wine-pkgs/
-COPY ./build/wine/after/ /opt/wine-pkgs/after/
-COPY ./build/*jdk* /opt/
-COPY ./build/vs_code* /opt/
-COPY ./build/idea* /opt/
+# COPY ./build/vs_code* /opt/
+# COPY ./build/chrome* /opt/
+# ## 不太好用
+# # COPY ./build/wine/ /opt/wine-pkgs/
+# COPY ./build/wine/after/ /opt/wine-pkgs/after/
+# COPY ./build/*jdk* /opt/
+# COPY ./build/vs_code* /opt/
+# COPY ./build/idea* /opt/
 #================================================================================================================
 
 # # 切换国内源
@@ -89,8 +89,8 @@ RUN echo "kasm-user:$USER_PWD" | chpasswd
 
 # # Install WineUI
 # ## 本地安装包路径 /opt/wine-pkgs/after
-# COPY ./src/ubuntu/install/wine $INST_SCRIPTS/wine/
-# RUN bash $INST_SCRIPTS/wine/custom_startup.sh  && rm -rf $INST_SCRIPTS/wine/
+COPY ./src/ubuntu/install/wine $INST_SCRIPTS/wine/
+RUN bash $INST_SCRIPTS/wine/custom_startup.sh  && rm -rf $INST_SCRIPTS/wine/
 
 USER 1000
 
