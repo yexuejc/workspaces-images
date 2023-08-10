@@ -39,11 +39,10 @@ RUN bash $INST_SCRIPTS/misc/install_tools.sh && rm -rf $INST_SCRIPTS/misc/
 # # COPY ./build/wine/ /opt/wine-pkgs/
 # COPY ./build/wine/after/ /opt/wine-pkgs/after/
 # COPY ./build/*jdk* /opt/
-# COPY ./build/vs_code* /opt/
 # COPY ./build/idea* /opt/
 #================================================================================================================
 
-# # 切换国内源
+# 切换国内源
 COPY ./src/ubuntu/source/ $INST_SCRIPTS/source/
 RUN bash $INST_SCRIPTS/source/update_source.sh && rm -rf $INST_SCRIPTS/source/
 
@@ -87,10 +86,14 @@ RUN mkdir -p $HOME && chown -R 1000:0 $HOME
 RUN adduser kasm-user sudo
 RUN echo "kasm-user:$USER_PWD" | chpasswd
 
-# # Install WineUI
-# ## 本地安装包路径 /opt/wine-pkgs/after
+# Install WineUI
+## 本地安装包路径 /opt/wine-pkgs/after
 COPY ./src/ubuntu/install/wine $INST_SCRIPTS/wine/
 RUN bash $INST_SCRIPTS/wine/custom_startup.sh  && rm -rf $INST_SCRIPTS/wine/
+
+## 创建桌面快捷方式
+COPY ./src/ubuntu/install/idea $INST_SCRIPTS/idea/
+RUN bash $INST_SCRIPTS/idea/idea_startup.sh && rm -rf $INST_SCRIPTS/idea/
 
 USER 1000
 

@@ -2,10 +2,10 @@
 set -ex
 
 folder_path=/opt/wine-pkgs/after
-cd $folder_path
 
 if [ -d "$folder_path" ] && find "$folder_path" -maxdepth 1 -name "*.deb" -print -quit | grep -q .; then
     # 本地安装wineUI
+    cd $folder_path
     dpkg -i WineGUI-*.deb && apt-get -f install
     rm -rf WineGUI-*.deb
 else
