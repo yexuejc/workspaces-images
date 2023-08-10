@@ -23,7 +23,7 @@ https://pan.quark.cn/s/21538580c53a
 
 ---
 ##### 新增开发环境develop(idea+wine)
-docker build -t yexuejc/kasm-ubuntu-develop:dev.02 -f dockerfile-kasm-develop .
+docker build -t yexuejc/kasm-ubuntu-develop:dev.03 -f dockerfile-kasm-develop .
 
 docker run --rm  -it --shm-size=512m -p 6902:6901 -e VNC_PW=password -e USER_PWD=passwd yexuejc/kasm-ubuntu-develop:dev.03
 

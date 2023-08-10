@@ -42,5 +42,5 @@ else
                 /var/tmp/*
         fi
     fi
-    rm -f pycharm-version.json
+    rm -f winegui-version.json
 fi

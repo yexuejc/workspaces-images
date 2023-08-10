@@ -23,7 +23,15 @@ mv idea-* idea
 # 破解
 cd /opt
 
-git clone https://github.com/libin9iOak/ja-netfilter-all.git
+# check网站是否能ping通（下面2个命令都可，实测第二个好用）
+# wget --quiet --spider --timeout=5 https://github.com/libin9iOak/ja-netfilter-all.git
+curl --silent --output /dev/null --head --fail --max-time 5 https://github.com/libin9iOak/ja-netfilter-all.git
+
+if [ $? = 0 ];then
+    git clone https://github.com/libin9iOak/ja-netfilter-all.git
+else
+    git clone https://gitee.com/yexuejc/ja-netfilter-all.git
+fi
 
 sh ja-netfilter-all/scripts/install.sh
 
