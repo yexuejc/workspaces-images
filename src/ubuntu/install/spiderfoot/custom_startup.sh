@@ -1,12 +1,16 @@
 #!/usr/bin/env bash
 set -ex
-START_COMMAND="zoom"
-PGREP="zoom"
-export MAXIMIZE="true"
-export MAXIMIZE_NAME="Zoom"
+START_COMMAND="firefox"
+PGREP="firefox"
+export MAXIMIZE="false"
+export MAXIMIZE_NAME="Mozilla Firefox"
 MAXIMIZE_SCRIPT=$STARTUPDIR/maximize_window.sh
-DEFAULT_ARGS=""
-ARGS=${APP_ARGS:-$DEFAULT_ARGS}
+DEFAULT_FIREFOX_ARGS=""
+FIREFOX_ARGS=${FIREFOX_APP_ARGS:-$DEFAULT_FIREFOX_ARGS}
+
+SPIDERFOOT_SERVER="127.0.0.1:5002"
+DEFAULT_SPIDERFOOT_ARGS="-l $SPIDERFOOT_SERVER"
+SPIDERFOOT_ARGS=${SPIDERFOOT_APP_ARGS:-$DEFAULT_SPIDERFOOT_ARGS}
 
 options=$(getopt -o gau: -l go,assign,url: -n "$0" -- "$@") || exit
 eval set -- "$options"
@@ -28,23 +32,13 @@ done
 
 FORCE=$2
 
-kasm_exec() {
-    if [ -n "$OPT_URL" ] ; then
-        URL=$OPT_URL
-    elif [ -n "$1" ] ; then
-        URL=$1
-    fi 
-    
-    # Since we are execing into a container that already has the browser running from startup, 
-    #  when we don't have a URL to open we want to do nothing. Otherwise a second browser instance would open. 
-    if [ -n "$URL" ] ; then
-        /usr/bin/filter_ready
-        /usr/bin/desktop_ready
-        bash ${MAXIMIZE_SCRIPT} &
-        $START_COMMAND $ARGS $OPT_URL
-    else
-        echo "No URL specified for exec command. Doing nothing."
-    fi
+# run with vgl if GPU is available
+if [ -f /opt/VirtualGL/bin/vglrun ] && [ ! -z "${KASM_EGL_CARD}" ] && [ ! -z "${KASM_RENDERD}" ] && [ -O "${KASM_RENDERD}" ] && [ -O "${KASM_EGL_CARD}" ] ; then
+    START_COMMAND="/opt/VirtualGL/bin/vglrun -d ${KASM_EGL_CARD} $START_COMMAND"
+fi
+
+check_web_server() {
+    curl -s -o /dev/null http://$SPIDERFOOT_SERVER && return 0 || return 1
 }
 
 kasm_startup() {
@@ -64,21 +58,21 @@ kasm_startup() {
             then
                 /usr/bin/filter_ready
                 /usr/bin/desktop_ready
+                cd $HOME/spiderfoot/spiderfoot-4.0/
+                xfce4-terminal -x python3 sf.py $SPIDERFOOT_ARGS &
+                while ! check_web_server; do
+                    sleep 1
+                done
                 set +e
                 bash ${MAXIMIZE_SCRIPT} &
-                $START_COMMAND $ARGS $URL
+                $START_COMMAND $FIREFOX_ARGS $URL
                 set -e
             fi
             sleep 1
         done
         set -x
-    
+
     fi
+}
 
-} 
-
-if [ -n "$GO" ] || [ -n "$ASSIGN" ] ; then
-    kasm_exec
-else
-    kasm_startup
-fi
+kasm_startup
